@@ -273,6 +273,9 @@ secrets/
 *.mp4
 *.mov
 *.avi
+!screenshots/*.png
+!screenshots/*.jpg
+!screenshots/*.jpeg
 
 # Documentation (keep only essential)
 !README.md
