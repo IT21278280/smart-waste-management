@@ -1,0 +1,123 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: smart_waste_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: smart_waste_db
+      MYSQL_USER: smartwaste
+      MYSQL_PASSWORD: password123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - smart_waste_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # ML Service
+  ml_service:
+    build:
+      context: ./ml_service
+      dockerfile: Dockerfile
+    container_name: smart_waste_ml
+    environment:
+      - PORT=8001
+      - MODEL_PATH=/app/models/waste_classifier.h5
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./ml_service/models:/app/models
+      - ml_cache:/root/.cache
+    networks:
+      - smart_waste_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8001/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+
+  # Laravel Backend
+  laravel:
+    build:
+      context: ./laravel_backend
+      dockerfile: Dockerfile
+    container_name: smart_waste_laravel
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=smart_waste_db
+      - DB_USERNAME=smartwaste
+      - DB_PASSWORD=password123
+      - ML_SERVICE_URL=http://ml_service:8001
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./laravel_backend:/var/www/html
+      - laravel_storage:/var/www/html/storage
+    networks:
+      - smart_waste_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ml_service:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+
+  # Redis (for caching and queues)
+  redis:
+    image: redis:7-alpine
+    container_name: smart_waste_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - smart_waste_network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+
+volumes:
+  mysql_data:
+  laravel_storage:
+  ml_cache:
+  redis_data:
+
+networks:
+  smart_waste_network:
+    driver: bridge
