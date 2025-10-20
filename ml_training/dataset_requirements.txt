@@ -1,0 +1,7 @@
+# Requirements for downloading and organizing datasets
+gdown>=4.7.1        # For downloading from Google Drive
+kaggle>=1.5.16      # For Kaggle dataset API
+tqdm>=4.66.1        # For progress bars
+Pillow>=10.1.0      # For image processing
+requests>=2.31.0    # For HTTP downloads
+gitpython>=3.1.40   # For cloning Git repositories
