@@ -153,6 +153,7 @@ Thumbs.db
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/logs/*
+/laravel_backend/public/storage
 /bootstrap/cache/*
 /.env
 .env.local
@@ -269,7 +270,6 @@ secrets/
 *.db
 
 # Screenshots and media
-screenshots/
 *.mp4
 *.mov
 *.avi
