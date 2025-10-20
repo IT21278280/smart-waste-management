@@ -62,12 +62,12 @@ A modern, AI-powered mobile application that revolutionizes waste management thr
 ## 📱 **Mobile App Screenshots**
 
 ### 🏠 **Home Page**
-![Smart Waste App Home Page](laravel_backend/public/screenshots/homepagepage.png)
+![Smart Waste App Home Page](screenshots/homepagepage.png)
 
 *Clean, modern interface with shadcn/ui design featuring waste categories, quick actions, and recent reports*
 
 ### 🤖 **Image Classification Page**
-![Smart Waste App Image Classification](laravel_backend/public/screenshots/imageclassify.png)
+![Smart Waste App Image Classification](screenshots/imageclassify.png)
 
 *AI-powered waste classification with real-time results, confidence scoring, and GPS location tracking*
 
