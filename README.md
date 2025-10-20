@@ -57,46 +57,19 @@ A modern, AI-powered mobile application that revolutionizes waste management thr
 - MySQL 8.0+
 - Composer & Node.js
 
-### Installation
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/IT21278280/smart-waste-management.git
-   cd smart-waste-management
-   ```
-
-2. **Setup Laravel Backend**
-   ```bash
-   cd laravel_backend
-   composer install
-   cp .env.example .env
-   php artisan key:generate
-   php artisan migrate
-   php artisan serve --host=0.0.0.0 --port=8000
-   ```
-
-3. **Setup ML Service**
-   ```bash
-   cd ml_service
-   pip install -r requirements.txt
-   python main.py
-   ```
-
-4. **Run Flutter App**
-   ```bash
-   cd flutter_app
-   flutter pub get
-   flutter run
-   ```
 
 ## 📱 **Mobile App Screenshots**
 
-*Coming soon - Screenshots will showcase:*
-- Clean, modern interface with shadcn/ui design
-- Camera integration for waste capture
-- Real-time classification results
-- Report history and status tracking
-- User-friendly navigation
+### 🏠 **Home Page**
+![Smart Waste App Home Page](laravel_backend/public/screenshots/homepagepage.png)
+
+*Clean, modern interface with shadcn/ui design featuring waste categories, quick actions, and recent reports*
+
+### 🤖 **Image Classification Page**
+![Smart Waste App Image Classification](laravel_backend/public/screenshots/imageclassify.png)
+
+*AI-powered waste classification with real-time results, confidence scoring, and GPS location tracking*
 
 ## 🛠️ **Technology Stack**
 
@@ -169,40 +142,3 @@ A modern, AI-powered mobile application that revolutionizes waste management thr
 - **Offline Capability**: Basic functionality without network
 - **Battery Efficient**: Minimal camera and GPS usage
 
-## 🚀 **Deployment**
-
-### Docker Deployment
-```bash
-docker-compose up -d
-```
-
-### Cloud Deployment
-- **Laravel**: Deploy to Heroku, DigitalOcean, AWS
-- **ML Service**: Deploy to Google Cloud AI, AWS SageMaker
-- **Flutter**: Build APKs for Play Store, IPAs for App Store
-
-## 🤝 **Contributing**
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 **Team**
-
-- **Developer**: IT21278280
-- **Project**: Smart Waste Management System
-- **Institution**: SLIIT
-
-## 📞 **Support**
-
-For questions or support, please open an issue on GitHub or contact the development team.
-
----
-
-**Built with ❤️ for a cleaner, smarter future**
